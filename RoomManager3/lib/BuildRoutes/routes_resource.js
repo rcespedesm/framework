@@ -3,16 +3,31 @@ var rootURI = config.rootURI;
 var endPoint = '{root}/resources/{complement}';
 
 var getURI = function(){
-    return URI();
+    return gpURI();
 };
 exports.getURI = getURI;
 
 var postURI = function(){
-    return URI();
+    return gpURI();
 };
+exports.postURI = postURI;
 
-var URI = function(){
+var delURI = function(){
+    return dpURI();
+};
+exports.delURI = delURI;
+
+var putURI = function(){
+    return dpURI();
+};
+exports.putURI = putURI;
+
+var gpURI = function(){
     endPoint = endPoint.replace('/{complement}', '');
     return endPoint.replace('{root}', rootURI);
 };
-exports.postURI = postURI;
+
+var dpURI = function(ID){
+    endPoint = endPoint.replace('{complement}', ID);
+    return endPoint.replace('{root}', rootURI);
+};

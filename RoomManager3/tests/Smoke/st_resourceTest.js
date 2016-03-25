@@ -25,7 +25,7 @@ describe("suit", function(){
         });
     });
 
-    it('GET /resources returns status code 200', function(done){
+    it('DEL /resources returns status code 200', function(done){
         request.mres.getResource(function(err, res){
             console.log(ID + "jojojo");
             done();
