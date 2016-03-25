@@ -21,15 +21,20 @@ describe("suit", function(){
         var body = generator.generator_resource.generateResource();
         request.mres.postResource(body, function(err, res){
            ID = res.body._id;
+            console.log(res.body);
             done();
         });
     });
 
-    it('DEL /resources returns status code 200', function(done){
-        request.mres.delResource(ID, function(err, res){
+     it('PUT /resources returns status code 200', function(done){
+        var body = generator.generator_resource.generateResource();
+        request.mres.putResource(ID, body, function(err, res){
+            console.log(ID);
+            console.log(res.body);
             done();
         });
 
     });
+
 
 });

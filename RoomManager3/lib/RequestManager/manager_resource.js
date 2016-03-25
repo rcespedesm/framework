@@ -26,6 +26,17 @@ var postResource = function(resourceBody, callback){
 }
 exports.postResource = postResource;
 
+var putResource = function(IdPut, body, callback){
+    var endPoint = resource.putURI(IdPut);
+    var authorization = config.typeAuthentication.jwt;
+    var dataRequest = {"Authorization" : authorization, "body" : body};
+
+    request.buildRequest("put", endPoint, dataRequest, function(err, res){
+        callback(err, res);
+    });
+}
+exports.putResource = putResource;
+
 var delResource = function(IdDelete, callback){
     var endPoint = resource.delURI(IdDelete);
     var authorization = config.typeAuthentication.jwt;
