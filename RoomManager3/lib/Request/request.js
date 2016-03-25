@@ -4,9 +4,9 @@ var headers = require('../../config/headers.json');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-var get = function(endPoint, callback){
-    request
-        .get(endPoint)
+var finishRequestGetDel = function(req, callback){
+
+    req
         .end(function(err,res){
             console.log("request");
             callback(err, res);
@@ -40,6 +40,9 @@ var finishRequestPostPut = function(req, dataRequest, callback){
 
 var buildRequest = function(type, endPoint, dataRequest, callback){
     var req;
+    if(arguments.length === 3)
+        var newCallback = arguments[2];
+
     switch(type){
         case "post":
             req = request.post(endPoint);
@@ -50,10 +53,12 @@ var buildRequest = function(type, endPoint, dataRequest, callback){
             finishRequestPostPut(req, dataRequest, callback);
             break;
         case "get":
-            var newCallback = arguments[2];
-            get(endPoint, newCallback);
+            req = request.get(endPoint);
+            finishRequestGetDel(req, newCallback);
             break;
         case "del":
+            req = request.get(endPoint);
+            finishRequestGetDel(req, newCallback);
             break;
     }
 

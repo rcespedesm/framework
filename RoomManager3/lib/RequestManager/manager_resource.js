@@ -26,3 +26,11 @@ var postResource = function(resourceBody, callback){
 }
 exports.postResource = postResource;
 
+var delResource = function(IdDelete, callback){
+    var endPoint = resource.delURI(IdDelete);
+    request.buildRequest("del", endPoint, function(err, res){
+        callback(err, res);
+    });
+}
+exports.delResource = delResource;
+

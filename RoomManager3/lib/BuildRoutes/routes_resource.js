@@ -12,13 +12,13 @@ var postURI = function(){
 };
 exports.postURI = postURI;
 
-var delURI = function(){
-    return dpURI();
+var delURI = function(IdDelete){
+    return dpURI(IdDelete);
 };
 exports.delURI = delURI;
 
-var putURI = function(){
-    return dpURI();
+var putURI = function(IdDelete){
+    return dpURI(IdDelete);
 };
 exports.putURI = putURI;
 
@@ -27,7 +27,7 @@ var gpURI = function(){
     return endPoint.replace('{root}', rootURI);
 };
 
-var dpURI = function(ID){
-    endPoint = endPoint.replace('{complement}', ID);
+var dpURI = function(IdDelete){
+    endPoint = endPoint.replace('{complement}', IdDelete);
     return endPoint.replace('{root}', rootURI);
 };
