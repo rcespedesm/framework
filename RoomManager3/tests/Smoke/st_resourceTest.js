@@ -27,7 +27,6 @@ describe("suit", function(){
 
     it('DEL /resources returns status code 200', function(done){
         request.mres.delResource(ID, function(err, res){
-
             done();
         });
 

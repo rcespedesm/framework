@@ -28,7 +28,10 @@ exports.postResource = postResource;
 
 var delResource = function(IdDelete, callback){
     var endPoint = resource.delURI(IdDelete);
-    request.buildRequest("del", endPoint, function(err, res){
+    var authorization = config.typeAuthentication.jwt;
+    var dataRequest = {"Authorization" : authorization};
+
+    request.buildRequest("del", endPoint, dataRequest, function(err, res){
         callback(err, res);
     });
 }

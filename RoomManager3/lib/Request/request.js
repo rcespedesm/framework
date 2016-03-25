@@ -4,11 +4,15 @@ var headers = require('../../config/headers.json');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-var finishRequestGetDel = function(req, callback){
+var finishRequestGetDel = function(req, dataRequest, callback){
+    if(arguments.length === 2)
+        var callback = arguments[1];
+    else
+        req = req.set(headers.get.Authorization.name, headers.get.Authorization.jwt);
+
 
     req
         .end(function(err,res){
-            console.log("request");
             callback(err, res);
         });
 };
@@ -57,8 +61,8 @@ var buildRequest = function(type, endPoint, dataRequest, callback){
             finishRequestGetDel(req, newCallback);
             break;
         case "del":
-            req = request.get(endPoint);
-            finishRequestGetDel(req, newCallback);
+            req = request.del(endPoint);
+            finishRequestGetDel(req, dataRequest, callback);
             break;
     }
 
