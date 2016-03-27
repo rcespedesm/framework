@@ -8,14 +8,12 @@ var postLogin = function(callback){
     var endPoint = authentication.postURI();
     var body = {"username": config.username, "password": config.password, "authentication": "local"};
 
-    var dataRequest = {"Authorization" : "", "body": body}
-
-
+    var dataRequest = {"Authorization" : "", "body": body};
     request.buildRequest("post", endPoint, dataRequest, function(err, res){
 
         headers.get.Authorization.jwt = config.typeAuthentication.jwt + res.body.token;
         headers.get.Authorization.basic = config.typeAuthentication.basic + "TODO";
         callback(err, res);
     });
-}
+};
 exports.postLogin = postLogin;
