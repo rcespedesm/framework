@@ -5,7 +5,7 @@ describe("Suit: Room Resources Service", function(){
 
     this.slow(10000);
     this.timeout(10000);
-    var room_ID = "56f8034fe7a7f71406302989";
+    var room_ID = "56f8034fe7a7f714063029d3";
     var resource_ID;
     var roomResourceId;
     var resourceBody;
@@ -27,7 +27,7 @@ describe("Suit: Room Resources Service", function(){
         generator.generator_resource.setPropertiesResource(resource_ID);
         resourceBody = generator.generator_resource.getResources();
         request.mroo.postRoomResource(room_ID, resourceBody, function(err, res){
-            roomResourceId = res.body[0];
+            roomResourceId = res.body[0]._id;
             console.log(roomResourceId + " roomResourceId");
             done();
         });

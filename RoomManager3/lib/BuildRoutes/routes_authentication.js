@@ -2,8 +2,8 @@ var config = require('../../config/config.json');
 var rootURI = config.rootURI;
 var endPoint = '{root}/login';
 /**
- * postURI is a function that is used to return an
- * specific endpoint("POST") for authentication service.
+ * This function is used to return an specific
+ * endpoint("POST") for "authentication" service(https://172.20.208.66:4040/login).
  * @returns {string}
  */
 var postURI = function(){

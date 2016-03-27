@@ -3,7 +3,11 @@ var resource =require('../../lib/BuildRoutes/routes_resource.js');
 var config = require('../../config/config.json');
 var headers = require('../../config/headers.json');
 var headersArray = [];
-
+/**
+ * This function is used to do the corresponding
+ * request ("GET") for "resource" service.
+ * @param callback {function}
+ */
 var getResource = function(callback){
     var endPoint = resource.getURI();
     request.buildRequest("get", endPoint, function(err, res){
@@ -11,7 +15,12 @@ var getResource = function(callback){
     });
 };
 exports.getResource = getResource;
-
+/**
+ * This function is used to do the corresponding
+ * request ("POST") for "resource" service.
+ * @param resourceBody {string}
+ * @param callback {function}
+ */
 var postResource = function(resourceBody, callback){
     var endPoint = resource.postURI();
     var authorization = config.typeAuthentication.jwt;
@@ -22,7 +31,13 @@ var postResource = function(resourceBody, callback){
     });
 };
 exports.postResource = postResource;
-
+/**
+ * This function is used to do the corresponding
+ * request ("PUT") for "resource" service.
+ * @param IdPut {string}
+ * @param body {string}
+ * @param callback {function}
+ */
 var putResource = function(IdPut, body, callback){
     var endPoint = resource.putURI(IdPut);
     var authorization = config.typeAuthentication.jwt;
@@ -32,7 +47,12 @@ var putResource = function(IdPut, body, callback){
     });
 };
 exports.putResource = putResource;
-
+/**
+ * This function is used to do the corresponding
+ * request ("DELETE") for "resource" service.
+ * @param IdDelete {string}
+ * @param callback {function}
+ */
 var delResource = function(IdDelete, callback){
     var endPoint = resource.delURI(IdDelete);
     var authorization = config.typeAuthentication.jwt;
