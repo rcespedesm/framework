@@ -16,8 +16,6 @@ describe("Suit: Service", function(){
 
     it('GET /Gets all the specified room’s resources, returns status code 200', function(done){
         request.mser.getServices(function(err, res){
-            console.log("----------------------------------------------");
-            console.log("All Services:");
             console.log(res.body);
             done();
         });

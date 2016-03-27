@@ -6,8 +6,6 @@ var headersArray = [];
 
 var getResource = function(callback){
     var endPoint = resource.getURI();
-    var dataRequest = {};
-
     request.buildRequest("get", endPoint, function(err, res){
         callback(err, res);
     });

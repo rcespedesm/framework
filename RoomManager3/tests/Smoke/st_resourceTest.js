@@ -26,14 +26,11 @@ describe("suit", function(){
         });
     });
 
-     it('PUT /resources returns status code 200', function(done){
-        var body = generator.generator_resource.generateResource();
-        request.mres.putResource(ID, body, function(err, res){
-            console.log(ID);
+     it.only('GET /resources returns status code 200', function(done){
+        request.mres.getResource(function(err, res){
             console.log(res.body);
             done();
         });
-
     });
 
 

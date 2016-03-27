@@ -5,9 +5,8 @@ var headers = require('../../config/headers.json');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 var finishRequestGetDel = function(req, dataRequest, callback){
-    if(arguments.length === 2)
-        var callback = arguments[1];
-    else
+
+    if(dataRequest.Authorization !== undefined)
         req = req.set(headers.get.Authorization.name, dataRequest.Authorization);
 
     req
@@ -35,12 +34,15 @@ var finishRequestPostPut = function(req, dataRequest, callback){
 
 var setAuthorization = function(dataRequest){
     var auth = dataRequest.Authorization;
-    if(auth === "jwt ")
+    if(auth === "jwt ") {
         auth = headers.get.Authorization.jwt;
-    else if(auth === "Basic ")
+    }
+    else if(auth === "Basic ") {
         auth = headers.get.Authorization.basic;
-    else if(auth === "")
+    }
+    else if(auth === "") {
         auth = "";
+    }
     dataRequest.Authorization = auth;
 
     return dataRequest;
@@ -48,10 +50,13 @@ var setAuthorization = function(dataRequest){
 
 var buildRequest = function(type, endPoint, dataRequest, callback){
     var req;
-    if(arguments.length === 3)
-        var newCallback = arguments[2];
-
-    dataRequest = setAuthorization(dataRequest);
+    if(arguments.length === 3){
+        var callback = arguments[2];
+        var dataRequest = {};
+        console.log(endPoint);
+    }else{
+        dataRequest = setAuthorization(dataRequest);
+    }
 
     switch(type){
         case "post":
@@ -64,8 +69,8 @@ var buildRequest = function(type, endPoint, dataRequest, callback){
             break;
         case "get":
             req = request.get(endPoint);
-            finishRequestGetDel(req, newCallback);
-           //TODO: finishRequestGetDel(req, dataRequest, callback);
+            finishRequestGetDel(req, dataRequest, callback);
+
             break;
         case "del":
             req = request.del(endPoint);
