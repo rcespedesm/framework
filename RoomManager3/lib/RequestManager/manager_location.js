@@ -45,3 +45,13 @@ var putLocation = function(ID, body, callback){
     });
 };
 exports.putLocation = putLocation;
+
+var delLocation = function(locationID, callback){
+    var endPoint = location.getURIID(locationID);
+    var authorization = config.typeAuthentication.jwt;
+    var dataRequest = {"Authorization" : authorization};
+    request.buildRequest("del", endPoint, dataRequest, function(err, res){
+        callback(err, res);
+    });
+};
+exports.delLocation = delLocation;

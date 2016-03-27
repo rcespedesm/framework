@@ -15,7 +15,7 @@ var getResource = function(callback){
 exports.getResource = getResource;
 
 var postResource = function(resourceBody, callback){
-    var endPoint = resource.getURI();
+    var endPoint = resource.postURI();
     var authorization = config.typeAuthentication.jwt;
     var dataRequest = {"Authorization" : authorization, "body": resourceBody};
 
@@ -29,7 +29,6 @@ var putResource = function(IdPut, body, callback){
     var endPoint = resource.putURI(IdPut);
     var authorization = config.typeAuthentication.jwt;
     var dataRequest = {"Authorization" : authorization, "body" : body};
-
     request.buildRequest("put", endPoint, dataRequest, function(err, res){
         callback(err, res);
     });

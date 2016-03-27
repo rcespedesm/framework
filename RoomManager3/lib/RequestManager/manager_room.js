@@ -41,21 +41,21 @@ exports.getRoomIDResources = getRoomIDResources;
 
 var getRoomIDResourcesID = function(roomID, resourceID, callback){
     var endPoint = room.getURI_Id(roomID) + "/resources/" + resourceID;
-    console.log(endPoint);
     request.buildRequest("get", endPoint, function(err, res){
         callback(err, res);
     });
 };
 exports.getRoomIDResourcesID = getRoomIDResourcesID;
-/*
+
 var delRoomIDResourcesID = function(roomID, resourceID, callback){
     var endPoint = room.getURI_Id(roomID) + "/resources/" + resourceID;
-    console.log(endPoint);
-    request.buildRequest("del", endPoint, function(err, res){
+    var authorization = config.typeAuthentication.jwt;
+    var dataRequest = {"Authorization" : authorization};
+    request.buildRequest("del", endPoint, dataRequest, function(err, res){
         callback(err, res);
     });
 };
-exports.delRoomIDResourcesID = delRoomIDResourcesID;*/
+exports.delRoomIDResourcesID = delRoomIDResourcesID;
 
 var putRoom = function(IdPut, body, callback){
     var endPoint = room.putURI(IdPut);

@@ -14,6 +14,7 @@ describe("Suit: Locations Service", function(){
             done();
         });
     });
+
     beforeEach(function(done){
         bodyLocation = generator.generator_location.generateLocation();
         request.mloc.postLocation(bodyLocation, function(err, res){
@@ -33,6 +34,7 @@ describe("Suit: Locations Service", function(){
             });
         });
     });
+
     it('GET /All the locations stored in the database, returns status code 200', function(done){
         request.mloc.getLocations(function(err, res){
             console.log("----------------------------------------------");
@@ -41,6 +43,7 @@ describe("Suit: Locations Service", function(){
             done();
         });
     });
+
     it('GET /A specific location, returns status code 200', function(done){
         request.mloc.getLocationsID(parentID, function(err, res){
             console.log("----------------------------------------------");
@@ -49,12 +52,23 @@ describe("Suit: Locations Service", function(){
             done();
         });
     });
+
     it('PUT /A specific location, returns status code 200', function(done){
         var body = generator.generator_location.generateLocation();
         request.mloc.putLocation(sonLocationID, body, function(err, res){
             console.log("----------------------------------------------");
             console.log("Specific Location:");
             console.log(res.body);
+            done();
+        });
+    });
+
+    it('DEL /A specific location, returns status code 200', function(done){
+        var body = generator.generator_location.generateLocation();
+        request.mloc.delLocation(sonLocationID, function(err, res){
+            console.log("----------------------------------------------");
+            console.log("Specific Location:");
+            console.log(res.status);
             done();
         });
     });

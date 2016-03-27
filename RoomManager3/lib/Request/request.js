@@ -8,8 +8,7 @@ var finishRequestGetDel = function(req, dataRequest, callback){
     if(arguments.length === 2)
         var callback = arguments[1];
     else
-        req = req.set(headers.get.Authorization.name, headers.get.Authorization.jwt);
-
+        req = req.set(headers.get.Authorization.name, dataRequest.Authorization);
 
     req
         .end(function(err,res){
@@ -18,21 +17,13 @@ var finishRequestGetDel = function(req, dataRequest, callback){
 };
 
 var finishRequestPostPut = function(req, dataRequest, callback){
-    var auth = dataRequest.Authorization;
-
-    if(auth === "jwt ")
-        auth = headers.get.Authorization.jwt;
-    else if(auth === "Basic ")
-        auth = headers.get.Authorization.basic;
-    else if(auth === "")
-        auth = "";
 
         req = req
             .set(headers.get.ContentType.name, headers.get.ContentType.value);
 
-        if(auth !== ""){
+        if(dataRequest.Authorization !== ""){
             req = req
-                .set(headers.get.Authorization.name, auth);
+                .set(headers.get.Authorization.name, dataRequest.Authorization);
         }
 
         req
@@ -42,10 +33,25 @@ var finishRequestPostPut = function(req, dataRequest, callback){
         });
 };
 
+var setAuthorization = function(dataRequest){
+    var auth = dataRequest.Authorization;
+    if(auth === "jwt ")
+        auth = headers.get.Authorization.jwt;
+    else if(auth === "Basic ")
+        auth = headers.get.Authorization.basic;
+    else if(auth === "")
+        auth = "";
+    dataRequest.Authorization = auth;
+
+    return dataRequest;
+}
+
 var buildRequest = function(type, endPoint, dataRequest, callback){
     var req;
     if(arguments.length === 3)
         var newCallback = arguments[2];
+
+    dataRequest = setAuthorization(dataRequest);
 
     switch(type){
         case "post":
@@ -59,6 +65,7 @@ var buildRequest = function(type, endPoint, dataRequest, callback){
         case "get":
             req = request.get(endPoint);
             finishRequestGetDel(req, newCallback);
+           //TODO: finishRequestGetDel(req, dataRequest, callback);
             break;
         case "del":
             req = request.del(endPoint);
