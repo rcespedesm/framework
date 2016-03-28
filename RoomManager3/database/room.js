@@ -5,9 +5,17 @@
 var DBmanager = require('../database/dataBaseManager.js');
 var mongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
-
-var url = 'mongodb://172.20.208.66:27017/roommanager';
-var table = 'rooms';
+var dbConfig = require('../config/dbconfig.json');
+/**
+ * URL representation on the API taken from dbconfig.json.
+ * @type {string}
+ */
+var url = dbConfig.url;
+/**
+ * collection name in MongoDB
+ * @type {string}
+ */
+var table = dbConfig.tables.room;
 
 /**
  * Find a specific room by ID in the database
