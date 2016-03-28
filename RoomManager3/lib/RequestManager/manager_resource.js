@@ -82,7 +82,7 @@ exports.delResource = delResource;
  * @param body {string}
  * @param callback {function}
  */
-var delAllResources = function(body, callback){
+/*var delAllResources = function(body, callback){
     var endPoint = resource.getURI();
     var authorization = config.typeAuthentication.jwt;
     var dataRequest = {"Authorization" : authorization, "body": body};
@@ -91,5 +91,5 @@ var delAllResources = function(body, callback){
         callback(err, res);
     });
 };
-exports.delAllResources = delAllResources;
+exports.delAllResources = delAllResources;*/
 
