@@ -17,6 +17,19 @@ var getResource = function(callback){
 exports.getResource = getResource;
 /**
  * This function is used to do the corresponding
+ * request ("GET") for a "resource" service.
+ * @param Id {string}
+ * @param callback {function}
+ */
+var getResourceID = function(Id, callback){
+    var endPoint = resource.getURIID(Id);
+    request.buildRequest("get", endPoint, function(err, res){
+        callback(err, res);
+    });
+};
+exports.getResourceID = getResourceID;
+/**
+ * This function is used to do the corresponding
  * request ("POST") for "resource" service.
  * @param resourceBody {string}
  * @param callback {function}
@@ -63,4 +76,20 @@ var delResource = function(IdDelete, callback){
     });
 };
 exports.delResource = delResource;
+/**
+ * This function is used to do the corresponding
+ * request ("DELETE") for all "resource" service.
+ * @param body {string}
+ * @param callback {function}
+ */
+var delAllResources = function(body, callback){
+    var endPoint = resource.getURI();
+    var authorization = config.typeAuthentication.jwt;
+    var dataRequest = {"Authorization" : authorization, "body": body};
+
+    request.buildRequest("del", endPoint, dataRequest, function(err, res){
+        callback(err, res);
+    });
+};
+exports.delAllResources = delAllResources;
 

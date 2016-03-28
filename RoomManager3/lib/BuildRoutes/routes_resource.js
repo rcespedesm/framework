@@ -31,6 +31,17 @@ var gpURI = function(){
 };
 /**
  * This function is used to return an specific
+ * endpoint("GET")that receives like parameter
+ * a "resource" ID.
+ * @param Id {string}
+ * @returns {string}
+ */
+var getURIID = function(Id){
+    return dpURI(Id);
+};
+exports.getURIID = getURIID;
+/**
+ * This function is used to return an specific
  * endpoint("DELETE")that receives like parameter
  * a "resource" ID.
  * @param IdDelete {string}

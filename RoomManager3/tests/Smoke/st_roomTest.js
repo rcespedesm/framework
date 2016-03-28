@@ -1,14 +1,22 @@
 var expect = require('chai');
 var request = require('../../lib/RequestManager/manager.js');
 var generator = require('../../utils/generator.js');
+var precondition = require('../../lib/Conditions/assertion.js');
 describe("Suit: Rooms Service", function(){
 
     this.slow(10000);
     this.timeout(10000);
-    var RoomID = "56ec5e0a0004801c0ce00dd0";
+    var RoomID ;// '56f811cfb020b44c0547bde7';
 
     before(function(done){
         request.maut.postLogin(function(err, res){
+            done();
+        });
+    });
+
+    before(function(done){
+        precondition.findAllRooms(function(res){
+            RoomID = res[0]._id;
             done();
         });
     });
@@ -17,7 +25,7 @@ describe("Suit: Rooms Service", function(){
         request.mroo.getRoom(function(err, res){
             console.log("----------------------------------------------");
             console.log("All Rooms:");
-            console.log(res.body);
+            console.log(res.status);
             done();
         });
      });
@@ -26,7 +34,7 @@ describe("Suit: Rooms Service", function(){
         request.mroo.getRoomID(RoomID, function(err, res){
             console.log("----------------------------------------------");
             console.log("Room by ID: " + RoomID);
-            console.log(res.body);
+            console.log(res.status);
             done();
         });
     });
@@ -36,7 +44,7 @@ describe("Suit: Rooms Service", function(){
         request.mroo.putRoom(RoomID, body, function(err, res){
             console.log("----------------------------------------------");
             console.log("Room: " + RoomID + " Has been uploaded");
-            console.log(res.body);
+            console.log(res.status);
             done();
         });
     });
