@@ -82,6 +82,32 @@ var remove = function (id, db, callback) {
     });
 };
 /**
+ * Update a table with a json
+ * @param {Object} id - Object Id
+ * @param {Object} setJson - $set must contain all parameters to change,
+ *                 e.g.   { $set: { "resources": resourceToInsert } }
+ * @param {function} callback - function for handle the object deleted
+ */
+var update = function(id, setJson,db, callback){
+    try {
+
+        db.collection(table).update(
+            {
+                "_id" : id
+            },
+            setJson
+            , function (err, result) {
+                console.log("UPDATED");
+                callback();
+            });
+
+    }
+    catch (e) {
+        print(e);
+    }
+
+};
+/**
  * Set the current table
  * @param {string} currentTable - Table name
  */
@@ -94,4 +120,5 @@ exports.find = find;
 exports.findAll = findAll;
 exports.findByParameters = findByParameters;
 exports.remove = remove;
+exports.update = update;
 exports.setTable = setTable;
